@@ -37,11 +37,11 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING, OCTETS
  16 .debug_macro  00022f4f  00000000  00000000  0001c13f  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_line   0001170a  00000000  00000000  0003f08e  2**0
+ 17 .debug_line   0001170b  00000000  00000000  0003f08e  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_str    000d2b52  00000000  00000000  00050798  2**0
+ 18 .debug_str    000d2b52  00000000  00000000  00050799  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .comment      00000043  00000000  00000000  001232ea  2**0
+ 19 .comment      00000043  00000000  00000000  001232eb  2**0
                   CONTENTS, READONLY
  20 .debug_frame  00004974  00000000  00000000  00123330  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
@@ -1439,19 +1439,19 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
 	}
 }
  800107e:	e063      	b.n	8001148 <HAL_TIM_IC_CaptureCallback+0x118>
-		else if (Prvi==1)   // if the first is already captured
+		else if (Prvi==1)
  8001080:	4b35      	ldr	r3, [pc, #212]	@ (8001158 <HAL_TIM_IC_CaptureCallback+0x128>)
  8001082:	781b      	ldrb	r3, [r3, #0]
  8001084:	2b01      	cmp	r3, #1
  8001086:	d15f      	bne.n	8001148 <HAL_TIM_IC_CaptureCallback+0x118>
-			Var2 = HAL_TIM_ReadCapturedValue(htim, TIM_CHANNEL_1);  // read second value
+			Var2 = HAL_TIM_ReadCapturedValue(htim, TIM_CHANNEL_1);
  8001088:	2100      	movs	r1, #0
  800108a:	6878      	ldr	r0, [r7, #4]
  800108c:	f002 fbd2 	bl	8003834 <HAL_TIM_ReadCapturedValue>
  8001090:	4603      	mov	r3, r0
  8001092:	4a33      	ldr	r2, [pc, #204]	@ (8001160 <HAL_TIM_IC_CaptureCallback+0x130>)
  8001094:	6013      	str	r3, [r2, #0]
-			__HAL_TIM_SET_COUNTER(htim, 0);  // reset the counter
+			__HAL_TIM_SET_COUNTER(htim, 0);
  8001096:	687b      	ldr	r3, [r7, #4]
  8001098:	681b      	ldr	r3, [r3, #0]
  800109a:	2200      	movs	r2, #0
@@ -1554,8 +1554,8 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
  800116c:	20000218 	.word	0x20000218
 
 08001170 <HAL_UART_RxCpltCallback>:
-volatile uint32_t motor_start = 0;  // Globalna promenljiva za praćenje vremena rada motora
-volatile uint8_t motor_rad = 0;      // Oznaka da li motor radi
+volatile uint32_t motor_start = 0;
+volatile uint8_t motor_rad = 0;
 
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
@@ -1563,14 +1563,14 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
  8001172:	b082      	sub	sp, #8
  8001174:	af00      	add	r7, sp, #0
  8001176:	6078      	str	r0, [r7, #4]
-    if (huart->Instance == USART3) // Proveravamo da li prekid dolazi sa USART3
+    if (huart->Instance == USART3)
  8001178:	687b      	ldr	r3, [r7, #4]
  800117a:	681b      	ldr	r3, [r3, #0]
  800117c:	4a25      	ldr	r2, [pc, #148]	@ (8001214 <HAL_UART_RxCpltCallback+0xa4>)
  800117e:	4293      	cmp	r3, r2
  8001180:	d143      	bne.n	800120a <HAL_UART_RxCpltCallback+0x9a>
     {
-        if (RX_TEKST[0] == '1' && !motor_rad)  // Ako primimo '1' i motor nije već uključen
+        if (RX_TEKST[0] == '1' && !motor_rad)
  8001182:	4b25      	ldr	r3, [pc, #148]	@ (8001218 <HAL_UART_RxCpltCallback+0xa8>)
  8001184:	781b      	ldrb	r3, [r3, #0]
  8001186:	2b31      	cmp	r3, #49	@ 0x31
@@ -1588,7 +1588,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
  800119a:	4822      	ldr	r0, [pc, #136]	@ (8001224 <HAL_UART_RxCpltCallback+0xb4>)
  800119c:	f003 f842 	bl	8004224 <HAL_UART_Transmit>
 
-            __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_4, 80); // Pokreni motor
+            __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_4, 80);
  80011a0:	4b21      	ldr	r3, [pc, #132]	@ (8001228 <HAL_UART_RxCpltCallback+0xb8>)
  80011a2:	681b      	ldr	r3, [r3, #0]
  80011a4:	2250      	movs	r2, #80	@ 0x50
@@ -1599,18 +1599,18 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
  80011ac:	2200      	movs	r2, #0
  80011ae:	639a      	str	r2, [r3, #56]	@ 0x38
 
-            motor_start = HAL_GetTick();  // Snimi trenutno vreme
+            motor_start = HAL_GetTick();
  80011b0:	f000 fd7e 	bl	8001cb0 <HAL_GetTick>
  80011b4:	4603      	mov	r3, r0
  80011b6:	4a1d      	ldr	r2, [pc, #116]	@ (800122c <HAL_UART_RxCpltCallback+0xbc>)
  80011b8:	6013      	str	r3, [r2, #0]
-            motor_rad = 1;                 // Obeleži da je motor uključen
+            motor_rad = 1;
  80011ba:	4b18      	ldr	r3, [pc, #96]	@ (800121c <HAL_UART_RxCpltCallback+0xac>)
  80011bc:	2201      	movs	r2, #1
  80011be:	701a      	strb	r2, [r3, #0]
  80011c0:	e01e      	b.n	8001200 <HAL_UART_RxCpltCallback+0x90>
         }
-        else if (RX_TEKST[0] == '0' && !motor_rad) // Ako primimo '0'
+        else if (RX_TEKST[0] == '0' && !motor_rad)
  80011c2:	4b15      	ldr	r3, [pc, #84]	@ (8001218 <HAL_UART_RxCpltCallback+0xa8>)
  80011c4:	781b      	ldrb	r3, [r3, #0]
  80011c6:	2b30      	cmp	r3, #48	@ 0x30
@@ -1639,18 +1639,18 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
  80011ec:	2250      	movs	r2, #80	@ 0x50
  80011ee:	639a      	str	r2, [r3, #56]	@ 0x38
 
-            motor_start = HAL_GetTick();  // Snimi trenutno vreme
+            motor_start = HAL_GetTick();
  80011f0:	f000 fd5e 	bl	8001cb0 <HAL_GetTick>
  80011f4:	4603      	mov	r3, r0
  80011f6:	4a0d      	ldr	r2, [pc, #52]	@ (800122c <HAL_UART_RxCpltCallback+0xbc>)
  80011f8:	6013      	str	r3, [r2, #0]
-            motor_rad = 1;                 // Obeleži da je motor uključen
+            motor_rad = 1;
  80011fa:	4b08      	ldr	r3, [pc, #32]	@ (800121c <HAL_UART_RxCpltCallback+0xac>)
  80011fc:	2201      	movs	r2, #1
  80011fe:	701a      	strb	r2, [r3, #0]
         }
 
-        HAL_UART_Receive_IT(&huart3, RX_TEKST, 1); // Ponovo pokreni prijem
+        HAL_UART_Receive_IT(&huart3, RX_TEKST, 1);
  8001200:	2201      	movs	r2, #1
  8001202:	4905      	ldr	r1, [pc, #20]	@ (8001218 <HAL_UART_RxCpltCallback+0xa8>)
  8001204:	4807      	ldr	r0, [pc, #28]	@ (8001224 <HAL_UART_RxCpltCallback+0xb4>)
@@ -1736,7 +1736,7 @@ int main(void)
   while (1)
   {
 
-	  if (motor_rad && (HAL_GetTick() - motor_start >= 3000))
+	  if (motor_rad && (HAL_GetTick() - motor_start >= 7000))
  800127e:	4b1e      	ldr	r3, [pc, #120]	@ (80012f8 <main+0xc4>)
  8001280:	781b      	ldrb	r3, [r3, #0]
  8001282:	b2db      	uxtb	r3, r3
@@ -1747,25 +1747,25 @@ int main(void)
  800128e:	4b1b      	ldr	r3, [pc, #108]	@ (80012fc <main+0xc8>)
  8001290:	681b      	ldr	r3, [r3, #0]
  8001292:	1ad3      	subs	r3, r2, r3
- 8001294:	f640 32b7 	movw	r2, #2999	@ 0xbb7
+ 8001294:	f641 3257 	movw	r2, #6999	@ 0x1b57
  8001298:	4293      	cmp	r3, r2
  800129a:	d90a      	bls.n	80012b2 <main+0x7e>
-	 		  	  			  	  			  	  	    {
-	 		  	  			  	  			  	  	        __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_4, 0);
+	 		   {
+	 		  	  __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_4, 0);
  800129c:	4b13      	ldr	r3, [pc, #76]	@ (80012ec <main+0xb8>)
  800129e:	681b      	ldr	r3, [r3, #0]
  80012a0:	2200      	movs	r2, #0
  80012a2:	641a      	str	r2, [r3, #64]	@ 0x40
-	 		  	  			  	  			  	  	        __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_2, 0);
+	 		  	  __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_2, 0);
  80012a4:	4b11      	ldr	r3, [pc, #68]	@ (80012ec <main+0xb8>)
  80012a6:	681b      	ldr	r3, [r3, #0]
  80012a8:	2200      	movs	r2, #0
  80012aa:	639a      	str	r2, [r3, #56]	@ 0x38
-	 		  	  			  	  			  	  	        motor_rad = 0;  // Motor je sada isključen
+	 		  	  	motor_rad = 0;
  80012ac:	4b12      	ldr	r3, [pc, #72]	@ (80012f8 <main+0xc4>)
  80012ae:	2200      	movs	r2, #0
  80012b0:	701a      	strb	r2, [r3, #0]
-	 		  	  			  	  			  	  	    }
+	 		  	  		 }
 	  HAL_Delay(10);
  80012b2:	200a      	movs	r0, #10
  80012b4:	f000 fd08 	bl	8001cc8 <HAL_Delay>
@@ -1776,27 +1776,28 @@ int main(void)
  80012bc:	4b10      	ldr	r3, [pc, #64]	@ (8001300 <main+0xcc>)
  80012be:	781b      	ldrb	r3, [r3, #0]
  80012c0:	2b05      	cmp	r3, #5
- 80012c2:	d809      	bhi.n	80012d8 <main+0xa4>
-		  	  		  HAL_Delay(500);
- 80012c4:	f44f 70fa 	mov.w	r0, #500	@ 0x1f4
- 80012c8:	f000 fcfe 	bl	8001cc8 <HAL_Delay>
+ 80012c2:	d808      	bhi.n	80012d6 <main+0xa2>
+		  	  	  HAL_Delay(200);
+ 80012c4:	20c8      	movs	r0, #200	@ 0xc8
+ 80012c6:	f000 fcff 	bl	8001cc8 <HAL_Delay>
 		  	  		__HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_2,2500);
- 80012cc:	4b06      	ldr	r3, [pc, #24]	@ (80012e8 <main+0xb4>)
- 80012ce:	681b      	ldr	r3, [r3, #0]
- 80012d0:	f640 12c4 	movw	r2, #2500	@ 0x9c4
- 80012d4:	639a      	str	r2, [r3, #56]	@ 0x38
- 80012d6:	e7d2      	b.n	800127e <main+0x4a>
+ 80012ca:	4b07      	ldr	r3, [pc, #28]	@ (80012e8 <main+0xb4>)
+ 80012cc:	681b      	ldr	r3, [r3, #0]
+ 80012ce:	f640 12c4 	movw	r2, #2500	@ 0x9c4
+ 80012d2:	639a      	str	r2, [r3, #56]	@ 0x38
+ 80012d4:	e7d3      	b.n	800127e <main+0x4a>
 
 		  	  	  }
 	       else{
 
 	    		 __HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_2,1500);
- 80012d8:	4b03      	ldr	r3, [pc, #12]	@ (80012e8 <main+0xb4>)
- 80012da:	681b      	ldr	r3, [r3, #0]
- 80012dc:	f240 52dc 	movw	r2, #1500	@ 0x5dc
- 80012e0:	639a      	str	r2, [r3, #56]	@ 0x38
-	  if (motor_rad && (HAL_GetTick() - motor_start >= 3000))
- 80012e2:	e7cc      	b.n	800127e <main+0x4a>
+ 80012d6:	4b04      	ldr	r3, [pc, #16]	@ (80012e8 <main+0xb4>)
+ 80012d8:	681b      	ldr	r3, [r3, #0]
+ 80012da:	f240 52dc 	movw	r2, #1500	@ 0x5dc
+ 80012de:	639a      	str	r2, [r3, #56]	@ 0x38
+	  if (motor_rad && (HAL_GetTick() - motor_start >= 7000))
+ 80012e0:	e7cd      	b.n	800127e <main+0x4a>
+ 80012e2:	bf00      	nop
  80012e4:	20000218 	.word	0x20000218
  80012e8:	20000260 	.word	0x20000260
  80012ec:	200002a8 	.word	0x200002a8

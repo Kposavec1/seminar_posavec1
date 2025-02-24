@@ -195,7 +195,7 @@ int main(void)
   while (1)
   {
 
-	  if (motor_rad && (HAL_GetTick() - motor_start >= 3000))
+	  if (motor_rad && (HAL_GetTick() - motor_start >= 7000))
 	 		   {
 	 		  	  __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_4, 0);
 	 		  	  __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_2, 0);
@@ -205,7 +205,7 @@ int main(void)
 	  HCSR04_Read();
 
 		  	  	  if (Udaljenost<=5){
-
+		  	  	  HAL_Delay(200);
 		  	  		__HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_2,2500);
 
 		  	  	  }
